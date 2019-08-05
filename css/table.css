@@ -1,0 +1,49 @@
+#dataTable  {
+    height: 30%;
+    border-collapse: collapse;
+    font-size: 14px;
+    width: 100%;
+    max-width: 100%;
+}
+#dataTable td,
+th {
+    padding: 8px;
+}
+#dataTable .filepath {
+    word-break: break-all;
+    font-size: 1em;
+    min-width: 150px;
+}
+#dataTable th {
+    font-size: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #182d41;
+    color: white;
+}
+#dataTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+#dataTable tr:hover {
+    background-color: #ddd;
+}
+.nodeHighlight {
+    /*background-color: darkgray !important;*/
+    border-bottom: 2px #1B4965 solid !important;
+}
+.input {
+    /*border-top: 2px orange solid !important;*/
+    border-bottom: 2px #49D49D solid !important;
+}
+.output {
+    /*border-top: 2px #4cbfff solid !important;*/
+    border-bottom: 2px #62B6CB solid !important;
+    /*border-bottom: 2px #4cbfff solid !important;*/
+}
+.circulardependency {
+    border-bottom: 2px #FAF33E solid !important;
+}
+#downloadCSV {
+    display: none;
+}

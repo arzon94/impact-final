@@ -1,0 +1,152 @@
+body {
+    font: 300 14px "Avenir", Helvetica, Arial, sans-serif;
+}
+button {
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: .40s;
+    padding: 12px 15px;
+    font-size: 1em;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 0px;
+    margin: 5px;
+    border: 1px solid ;
+    /*color: #4cbfff;*/
+    -webkit-transition: .40s;
+}
+button:focus{
+    outline: none;
+}
+button:hover {
+    background: #00b08d;
+    border: 1px solid #0074be;
+    background: #19bbb7;
+    background: #62bae9;
+    background: #04707B;
+    background: #0074be;
+    color: white;
+    transition: .40s;
+    -webkit-transition: .40s;
+}
+
+#canvasqPWKOg svg{
+    max-height: 70%;
+}
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    min-height: 50%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.node {
+    cursor: pointer;
+}
+.node .label {
+    pointer-events: none;
+}
+.node rect,
+.node circle,
+.node ellipse {
+    stroke: #333;
+    fill: #fff;
+    stroke-width: 1.5px;
+}
+/*#tooltip_template {*/
+/*    position: absolute;*/
+/*    background-color: white;*/
+/*    border: 2px solid;*/
+/*    border-radius: 5px;*/
+/*    padding: 5px;*/
+/*    z-index: 10;*/
+/*    visibility: hidden;*/
+/*}*/
+.tooltip {
+    /*position: relative;*/
+    /*display: inline-block;*/
+    /*border-bottom: 1px dotted black;*/
+}
+.tooltip table {
+    /*table-layout: fixed;*/
+}
+.tooltiptext table td {
+    text-align: left;
+}
+#path-container{
+    word-break: break-all;
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #292929;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-size: 0.85em;
+    padding: 5px;
+}
+.tooltip .tooltiptext .lefttip{
+    top: -5px;
+    left: 110%;
+}
+.tooltip .tooltiptext .toptip{
+    top: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after{
+        content: "";
+        position: absolute;
+        top: 20%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent black transparent transparent;
+}
+/*.tooltip .lefttip.tooltiptext::after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 100%;*/
+/*    margin-top: -5px;*/
+/*    border-width: 5px;*/
+/*    border-style: solid;*/
+/*    border-color: transparent black transparent transparent;*/
+/*}*/
+/*.tooltip .tooltiptext.toptip::after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    bottom: 100%;*/
+/*    left: 50%;*/
+/*    margin-left: -5px;*/
+/*    border-width: 5px;*/
+/*    border-style: solid;*/
+/*    border-color: transparent transparent black transparent;*/
+/*}*/
+.small {
+    font-size: 0.85em;
+}
+.filepath {
+    font-size: 0.7em;
+    /*overflow-x: visible;*/
+    /*text-wrap: normal;*/
+    /*max-width: 100px;*/
+}
+.edgePath path {
+    stroke: #333;
+    fill: #333;
+    stroke-width: 1.5px;
+}

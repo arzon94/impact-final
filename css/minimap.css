@@ -1,0 +1,45 @@
+html, body {
+    font-family: Arial, sans-serif;
+}
+.title {
+    font-size: 12px;
+}
+.canvas {
+    min-height: 500px;
+    overflow: hidden;
+}
+.canvas .wrapper.outer > .background {
+    fill: #000000;
+}
+.canvas .wrapper.inner > .background {
+    fill: #CCCCCC;
+    cursor: move;
+}
+.canvas .background {
+    fill: #fff;
+    /*stroke: #333333;*/
+    cursor: move;
+}
+.canvas .panCanvas {
+    cursor: move;
+}
+.minimap {
+    /*position: fixed;*/
+    /*float: left;*/
+    /*position: absolute;*/
+}
+.canvas .minimap .background {
+    fill: rgba(1, 1, 1, .05);
+}
+.canvas .minimap .frame {
+    pointer-events: all;
+}
+.canvas .minimap .frame .background {
+    /*stroke: #111111;*/
+    stroke-width: 4px;
+    fill-opacity: 0.1;
+    fill: #000000;
+    /*fill: url(#minimapGradient_qwpyza);*/
+    filter: url(#minimapDropShadow_qwpyza);
+    cursor: move;
+}
