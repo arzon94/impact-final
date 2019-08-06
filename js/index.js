@@ -63,7 +63,6 @@ function populateMap(data) {
         }
     }
     populateFilter();
-    graphMap = dataGenerator(multipleRoots)
 
     // let a = dataGenerator(multipleRoots, new Map());
     // graphMap = a[0];
