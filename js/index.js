@@ -24,7 +24,7 @@ let graphMap = new Map(),
     orientation = 'TB',
     multipleRoots = true,
     graph = new dagreD3.graphlib.Graph({ compound: true});
-graph.setGraph({rankdir: orientation, nodesep: 50, ranksep: 100,}).setDefaultEdgeLabel(function() { return {}; });
+graph.setGraph({rankdir: orientation, nodesep: 25, }).setDefaultEdgeLabel(function() { return {}; });
 
 const labelText = ({icon, name, fileType}, color) => {
     //remove filepath to leave only file name in name
@@ -62,9 +62,13 @@ function populateMap(data) {
             }
         }
     }
-    populateFilter()
+    populateFilter();
+    graphMap = dataGenerator(multipleRoots)
 
-    // graphMap = dataGenerator(multipleRoots)
+    // let a = dataGenerator(multipleRoots, new Map());
+    // graphMap = a[0];
+    // fileTypesMap = a[1];
+    // populateFilter();
 }
 function populateFilter() {
     let select = document.getElementById( 'multi-select-options' ),
@@ -285,7 +289,7 @@ function renderGraph() {
     let canvasWidth = width*.75, canvasHeight = height * .75;
 
 
-    inner.attr("transform", (graphWidth > graphHeight) ? function () {
+    inner.attr("transform", (graphWidth > graphHeight/.75) ? function () {
         let newScale = (canvasWidth > graphWidth) ? 1 : canvasWidth / (graphWidth),
             xOffset = (canvasWidth/newScale - graphWidth)/2,
             yOffset = (canvasHeight/newScale - graphHeight )/2;
@@ -330,9 +334,9 @@ d3.select("#viewSwitch").on("click", () => {
     fileTypesMap = a[1];
     graph = new dagreD3.graphlib.Graph({compound: true} )
     graph.setGraph({rankdir: orientation, nodesep: 25,});
-    graph.graph().transition = function(selection) {
-        return selection.transition().duration(500);
-    };
+    // graph.graph().transition = function(selection) {
+    //     return selection.transition().duration(500);
+    // };
     populateFilter();
     generateDAG();
     renderGraph();

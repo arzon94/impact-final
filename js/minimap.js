@@ -1,3 +1,7 @@
+// import {select} from 'd3-selection';
+// import {event} from 'd3-selection';
+// import {zoom, zoomIdentity} from 'd3-zoom';
+// const d3 = {select, event, zoomIdentity, zoom};
 import * as d3 from 'd3';
 
 let minimapScale = 0.15,
@@ -12,7 +16,6 @@ let minimapScale = 0.15,
 export default function minimap(selection) {
 
     base = selection;
-
     const zoom = d3.zoom()
         .scaleExtent([0.1, 5]);
 
