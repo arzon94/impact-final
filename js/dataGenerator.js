@@ -1,11 +1,19 @@
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1) + min),
     randomFileType = () => fileTypes[Math.floor(Math.random() * fileTypes.length)],
     parseDate = (str) => {return new Date(str.replace(/^(\d{4})(\d\d)(\d\d)(\d\d)(\d\d)(\d\d)(\w\w\w)$/, '$4:$5:$6 $2/$3/$1')).toDateString();},
-    icons = {"job": "\uf013", "sas": "\uf70c", "xls": "\uf1c3", "csv": "\uf6dd", "sas7bdat": "\uf0ce", "log": "\uf039", "mnf": "\uf542" };
+    icons = {"job": "\uf013", "sas": "\uf70c", "xls": "\uf1c3", "csv": "\uf6dd", "sas7bdat": "\uf0ce", "log": "\uf039", "mnf": "\uf542" },
+    fileName = () => {
+        let result = '';
+        const characters = 'abcdefghijklmnopqrstuvwxyz';
+        for (let i = 0; i < 5; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result
+    };
 
 let fileTypes = ["job", "sas", "xls", "sas7bdat", "mnf", "csv", "log"],
     fileTypesMap,
-graphMap;
+    graphMap;
 
 // const fileIcons = [];
 const generateId = length => {
@@ -28,7 +36,7 @@ function createRootNode() {
     }
     const fileType = randomFileType();
     const icon = icons[fileType];
-    const name = 'file';
+    const name = fileName();
 
     updateFileTypesMap(fileType, id);
     graphMap.set(id, {
@@ -51,7 +59,7 @@ function createInputNode(rootId) {
     const id = generateId(16);
     const fileType = randomFileType();
     const icon = icons[fileType];
-    const name = 'in41';
+    const name = 'in';
     updateFileTypesMap(fileType, id);
     graphMap.set(id, {
         detail: {
@@ -73,7 +81,7 @@ function createOutputNode(rootId) {
     const id = generateId(16)
     , fileType = randomFileType()
     , icon = icons[fileType]
-    , name = 'adsl';
+    , name = 'out';
     updateFileTypesMap(fileType, id);
     graphMap.set(id, {
         detail: {

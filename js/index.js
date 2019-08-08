@@ -21,7 +21,7 @@ const render = dagreD3.render(),
 };
 let graphMap = new Map(),
     fileTypesMap = new Map(),
-    orientation = 'TB',
+    orientation = 'LR',
     multipleRoots = true,
     graph = new dagreD3.graphlib.Graph({ compound: true});
 graph.setGraph({rankdir: orientation, nodesep: 25, }).setDefaultEdgeLabel(function() { return {}; });
@@ -101,6 +101,25 @@ function filter(key){
     generateDAG();
     renderGraph();
 }
+function getAllDescendants(id, descendants){
+    let outputs = graphMap.get(id).outputs;
+    outputs.forEach((child) => {
+        descendants.push(child);
+        if (!graphMap.get(child).outputs.isEmpty){
+            getAllDescendants(child, descendants)
+        }
+    });
+    return descendants
+}
+function getAllAncestors(id, ancestors){
+    graphMap.get(id).inputs.forEach((parent) => {
+        ancestors.push(parent);
+        if (!graphMap.get(parent).inputs.isEmpty){
+            getAllAncestors(parent, ancestors)
+        }
+    });
+    return ancestors;
+}
 function highlightNeighbors(d) {
     table.createTable();
     let button = document.getElementById("downloadCSV");
@@ -109,9 +128,9 @@ function highlightNeighbors(d) {
 
     table.addTableRow(d, graphMap.get(d));
     document.getElementById(d).setAttribute("class", "nodeHighlight");
-
-    let children = graphMap.get(d).outputs;
-    let parents = graphMap.get(d).inputs;
+    // let children = graphMap.get(d).outputs;
+    let children = getAllDescendants(d, []);
+    let parents = getAllAncestors(d, []);
     const circulardp = children.filter(element => parents.includes(element));
     if (circulardp.length > 0) {
         children = children.filter(element => !circulardp.includes(element))
@@ -288,7 +307,7 @@ function renderGraph() {
     let canvasWidth = width*.75, canvasHeight = height * .75;
 
 
-    inner.attr("transform", (graphWidth > graphHeight/.75) ? function () {
+    inner.attr("transform", (graphWidth > graphHeight) ? function () {
         let newScale = (canvasWidth > graphWidth) ? 1 : canvasWidth / (graphWidth),
             xOffset = (canvasWidth/newScale - graphWidth)/2,
             yOffset = (canvasHeight/newScale - graphHeight )/2;
@@ -300,7 +319,7 @@ function renderGraph() {
         return `scale(${newScale}) translate(${xOffset},${yOffset})`
     });
 
-    let canvas = canvaser.width(canvasWidth).height(height*.75);
+    let canvas = canvaser.width(canvasWidth).height(canvasHeight);
 
     // canvas.width(graph.graph().width).height(graph.graph().height);
     d3.select("#canvasqPWKOg").call(canvas);
