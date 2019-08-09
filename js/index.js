@@ -35,39 +35,39 @@ const labelText = ({icon, name, fileType}, color) => {
 };
 
 function populateMap(data) {
-    // let initialData = data || json;
-    // for (const i in initialData) {
-    //     let id = initialData[i]["nodeId"];
-    //     if (graphMap.has(id)){
-    //         let currentEntry = graphMap.get(id);
-    //         currentEntry.inputs = [...currentEntry.inputs, ...initialData[i]["inputs"]];
-    //         currentEntry.outputs = [...currentEntry.outputs, ...initialData[i]["outputs"]];
-    //     }
-    //     else {
-    //         graphMap.set(id, {
-    //             outputs: initialData[i]["outputs"],
-    //             detail: initialData[i]["detail"],
-    //             inputs: initialData[i]["inputs"],
-    //             display: true
-    //         });
-    //         let type = initialData[i]["detail"]["fileType"];
-    //         if (fileTypesMap.has(type)){
-    //             fileTypesMap.get(type).ids.push(id);
-    //         }
-    //         else {
-    //             fileTypesMap.set(type, {
-    //                 display: true,
-    //                 ids: [id]
-    //             })
-    //         }
-    //     }
-    // }
+    let initialData = data || json;
+    for (const i in initialData) {
+        let id = initialData[i]["nodeId"];
+        if (graphMap.has(id)){
+            let currentEntry = graphMap.get(id);
+            currentEntry.inputs = [...currentEntry.inputs, ...initialData[i]["inputs"]];
+            currentEntry.outputs = [...currentEntry.outputs, ...initialData[i]["outputs"]];
+        }
+        else {
+            graphMap.set(id, {
+                outputs: initialData[i]["outputs"],
+                detail: initialData[i]["detail"],
+                inputs: initialData[i]["inputs"],
+                display: true
+            });
+            let type = initialData[i]["detail"]["fileType"];
+            if (fileTypesMap.has(type)){
+                fileTypesMap.get(type).ids.push(id);
+            }
+            else {
+                fileTypesMap.set(type, {
+                    display: true,
+                    ids: [id]
+                })
+            }
+        }
+    }
     populateFilter();
-
-    let a = dataGenerator(multipleRoots, new Map());
-    graphMap = a[0];
-    fileTypesMap = a[1];
-    populateFilter();
+    //for random data generation
+    // let a = dataGenerator(multipleRoots, new Map());
+    // graphMap = a[0];
+    // fileTypesMap = a[1];
+    // populateFilter();
 }
 function populateFilter() {
     let select = document.getElementById( 'multi-select-options' ),
@@ -104,8 +104,8 @@ function filter(key){
 function getAllDescendants(id, descendants){
     let outputs = graphMap.get(id).outputs;
     outputs.forEach((child) => {
-        descendants.push(child);
-        if (!graphMap.get(child).outputs.isEmpty){
+        if (!graphMap.get(child).outputs.isEmpty && !(descendants.includes(child))){
+            descendants.push(child);
             getAllDescendants(child, descendants)
         }
     });
@@ -113,8 +113,8 @@ function getAllDescendants(id, descendants){
 }
 function getAllAncestors(id, ancestors){
     graphMap.get(id).inputs.forEach((parent) => {
-        ancestors.push(parent);
-        if (!graphMap.get(parent).inputs.isEmpty){
+        if (!graphMap.get(parent).inputs.isEmpty && !(ancestors.includes(parent))){
+            ancestors.push(parent);
             getAllAncestors(parent, ancestors)
         }
     });
@@ -360,6 +360,8 @@ d3.select("#viewSwitch").on("click", () => {
     renderGraph();
 });
 
+//you can import json via external json file in the populateMap function
+//ex: populateMap('https://example.json');
 populateMap();
 generateDAG();
 renderGraph();
