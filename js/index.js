@@ -306,14 +306,16 @@ function renderGraph() {
     let graphWidth = graph.graph().width, graphHeight = graph.graph().height;
     let canvasWidth = width*.75, canvasHeight = height * .75;
 
-
-    inner.attr("transform", (graphWidth > graphHeight) ? function () {
-        let newScale = (canvasWidth > graphWidth) ? 1 : canvasWidth / (graphWidth),
+    console.log("gwidth: ", graphWidth, " height: ", graphHeight);
+    console.log("cwidth: ", canvasWidth, " height: ", canvasHeight);
+    inner.attr("transform", ((canvasHeight) /( graphHeight) > (canvasWidth)/ (graphWidth)) ? function () {
+        let newScale = (canvasWidth > graphWidth) ? 1 :   (canvasWidth)/ (graphWidth),
             xOffset = (canvasWidth/newScale - graphWidth)/2,
             yOffset = (canvasHeight/newScale - graphHeight )/2;
+        console.log("scale", newScale)
         return `scale(${newScale}) translate(${xOffset},${yOffset})`
     } : function () {
-        let newScale = (canvasHeight > graphHeight) ? 1 : canvasHeight / (graphHeight) ,
+        let newScale = (canvasHeight > graphHeight) ? 1 :  (canvasHeight) /( graphHeight) ,
             xOffset = (canvasWidth/newScale - graphWidth) / 2,
             yOffset = (canvasHeight/newScale - graphHeight) / 2;
         return `scale(${newScale}) translate(${xOffset},${yOffset})`
